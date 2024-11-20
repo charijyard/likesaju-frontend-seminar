@@ -23,8 +23,10 @@ export const FAQSection = () => {
 
   return (
     <SectionLayout>
-      <div className="w-full h-full flex flex-col gap-[80px]">
-        <h3 className="text-left text-4xl nanum-extra-bold">FAQs</h3>
+      <div className="w-full flex flex-col gap-16 px-6 md:px-16 lg:px-24">
+        <h3 className="text-left text-4xl nanum-extra-bold mobile:text-center mobile:text-2xl">
+          FAQs
+        </h3>
         <div className="flex flex-col gap-[30px] justify-center">
           {faqAccordionInfo.map((accordion) => (
             <FAQAccordion
@@ -45,7 +47,7 @@ const FAQAccordion = ({ question, answer }) => {
   return (
     <div className="flex flex-col rounded-xl px-[50px] py-10 shadow-2xl w-full gap-5">
       <div className="flex justify-between items-center gap-5">
-        <p className="text-xl font-bold truncate">{question}</p>
+        <p className="text-xl font-bold truncate mobile:text-sm">{question}</p>
         <button
           className="rounded-full shadow-lg transition"
           onClick={() => {
@@ -53,32 +55,30 @@ const FAQAccordion = ({ question, answer }) => {
           }}
         >
           <svg
-            className={`transition transform ${isOpen ? '' : '-rotate-90'}`}
+            className={`transition-transform transform ${
+              isOpen ? 'rotate-180' : 'rotate-0'
+            }`}
             xmlns="http://www.w3.org/2000/svg"
-            width="51"
-            height="51"
-            viewBox="0 0 51 51"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
             fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <circle
-              className="transition"
-              cx="25.6691"
-              cy="25.3309"
-              r="25.3309"
-              fill={!isOpen ? '#FFFFFF' : '#6F6C90'}
-            />
-            <path
-              className="transition"
-              d="M17.4125 22.2212L25.6691 30.4405L33.9257 22.2212"
-              stroke={!isOpen ? '#6F6C90' : '#FFFFFF'}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
       </div>
-      {isOpen && <p className="text-lg w-full text-left">{answer}</p>}
+      <div
+        className={`transition-max-height duration-1000 ease-in-out overflow-hidden ${
+          isOpen ? 'max-h-screen' : 'max-h-0'
+        }`}
+      >
+        <p className="text-lg w-full text-left mt-4 mobile:text-sm">{answer}</p>
+      </div>
     </div>
   );
 };
